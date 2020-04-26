@@ -8,6 +8,8 @@ edition = "2018"
 
 [dependencies]
 cfg-if = "0.1"
+dotenv = "0.15"
+dotenv_codegen = "0.15"
 libc = "0.2"
 
 [target.'cfg(windows)'.dependencies.winapi]
@@ -16,3 +18,4 @@ features = ["combaseapi", "objbase", "spellcheck"]
 
 [target.'cfg(not(windows))'.dependencies]
 hunspell-sys = "0.1"
+regex = "1.3"

@@ -1,12 +1,11 @@
-mod null;
-
 use cfg_if::cfg_if;
 
 cfg_if! {
     if #[cfg(windows)] {
+        mod null;
         mod windows;
         use windows as implementation;
-    } else if #[cfg(unix)] {
+    } else if #[cfg(not(windows))] {
         mod unix;
         use unix as implementation;
     } else {
@@ -51,7 +50,7 @@ impl Checker {
     }
 
     /// Suggest alternatives for a misspelled word.
-    pub fn suggest(&mut self, word: &str) -> impl Iterator<Item = String> {
+    pub fn suggest<'a>(&'a mut self, word: &str) -> impl Iterator<Item = String> + 'a {
         self.0.suggest(word)
     }
 
